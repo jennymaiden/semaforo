@@ -7,6 +7,7 @@ package presentacion;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JRadioButton;
 
 /**
@@ -43,6 +44,13 @@ public class ControladorSimulacion implements ActionListener {
                 getModelo().accionAmarilla(radioButton.isSelected(), 2);
             } else if (radioButton == simulacion.getBtnVerde_grup2()) {
                 getModelo().accionVerde(radioButton.isSelected(), 2);
+            }
+        } else if (e.getSource() instanceof JButton) {
+            JButton btnButton = (JButton) e.getSource();
+            if (btnButton == simulacion.getBtn_off()){
+                getModelo().accionApagarTodo();
+            } else if (btnButton == simulacion.getBtn_on()) {
+                getModelo().accionEncenderTodo();
             }
         }
     }

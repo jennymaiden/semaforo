@@ -4,12 +4,10 @@
  */
 package presentacion;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
-import persistencia.Vehicular;
 
 /**
  *
@@ -67,6 +65,8 @@ public class VistaSimulacion extends javax.swing.JDialog {
         btnRojo_grup2 = new javax.swing.JRadioButton();
         btnAmarillo_grup2 = new javax.swing.JRadioButton();
         btnVerde_grup2 = new javax.swing.JRadioButton();
+        btn_off = new javax.swing.JButton();
+        btn_on = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -222,6 +222,10 @@ public class VistaSimulacion extends javax.swing.JDialog {
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        btn_off.setText("Apagar todo");
+
+        btn_on.setText("Encender todo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -234,20 +238,28 @@ public class VistaSimulacion extends javax.swing.JDialog {
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(350, 350, 350)
-                        .addComponent(jLabel1)))
-                .addContainerGap(260, Short.MAX_VALUE))
+                        .addGap(257, 257, 257)
+                        .addComponent(jLabel1)
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_on)
+                            .addComponent(btn_off))))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addGap(43, 43, 43)
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btn_off))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btn_on)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(195, 195, 195))
+                .addContainerGap(295, Short.MAX_VALUE))
         );
 
         pack();
@@ -269,6 +281,8 @@ public class VistaSimulacion extends javax.swing.JDialog {
         btnRojo_grup2.addActionListener(getControlador());
         btnAmarillo_grup2.addActionListener(getControlador());
         btnVerde_grup2.addActionListener(getControlador());
+        btn_off.addActionListener(getControlador());
+        btn_on.addActionListener(getControlador());
                 
     }
 
@@ -280,6 +294,8 @@ public class VistaSimulacion extends javax.swing.JDialog {
     private javax.swing.JRadioButton btnRojo_grup2;
     private javax.swing.JRadioButton btnVerde;
     private javax.swing.JRadioButton btnVerde_grup2;
+    private javax.swing.JButton btn_off;
+    private javax.swing.JButton btn_on;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JPanel jPanel1;
@@ -359,6 +375,14 @@ public class VistaSimulacion extends javax.swing.JDialog {
 
     public JLabel getLbl_grup2_image_yellow() {
         return lbl_grup2_image_yellow;
+    }
+
+    public JButton getBtn_off() {
+        return btn_off;
+    }
+
+    public JButton getBtn_on() {
+        return btn_on;
     }
 
     
