@@ -8,7 +8,7 @@ package logica;
  *
  * @author cvelez
  */
-public class CicloSemaforico {
+public class Cliente {
     
     public void sincronizar_conjunto(){
     
