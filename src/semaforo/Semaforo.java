@@ -4,6 +4,7 @@
  */
 package semaforo;
 
+import java.io.IOException;
 import presentacion.Modelo;
 
 /**
@@ -14,9 +15,10 @@ public class Semaforo {
     
     private final Modelo miSemaforo;
 
-    public Semaforo() {
+    public Semaforo() throws IOException {
         miSemaforo = new Modelo();
         miSemaforo.iniciar();
+        miSemaforo.conectarClientes(1);
     }
     
     
@@ -24,7 +26,7 @@ public class Semaforo {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
         new Semaforo();
     }

@@ -4,7 +4,11 @@
  */
 package presentacion;
 
+import java.io.IOException;
 import javax.swing.ImageIcon;
+import logica.ConexionCliente;
+import logica.SistemaCliente;
+import logica.SistemaHilos;
 import persistencia.Vehicular;
 
 /**
@@ -25,10 +29,43 @@ public class Modelo {
         return ventanaSimulacion;
     }
 
-    public void iniciar() {
+    public void iniciar() throws IOException {
         getVistaSimulacion().setSize(800, 600);
         getVistaSimulacion().setVisible(true);
         getVistaSimulacion().setLocationRelativeTo(null);
+       
+
+    }
+
+    public void conectarClientes(int numCruce) throws IOException {
+        ConexionCliente cliente = new ConexionCliente();
+        switch (numCruce) {
+            case 1: // Primer cruce
+
+                System.out.println("Usted eligió la opcion 1.");
+                //Iniciar cliente
+                cliente.ejecutarConexion("localhost", 5050);
+                cliente.ejecutarConexion("192.68.0.10", 5050);
+                
+                break;
+
+            case 2: // Segundo cruce
+
+                System.out.println("Usted eligió la opcion 2.");
+
+                break;
+
+            case 3: // Tercer cruce
+
+                System.out.println("Usted eligió la opcion 3.");
+
+                break;
+
+            default:
+
+                System.out.println("Opcion incorrecta");
+
+        }
     }
 
     /*
@@ -120,7 +157,7 @@ public class Modelo {
         getVistaSimulacion().getBtnRojo().setEnabled(false);
         getVistaSimulacion().getBtnAmarillo().setEnabled(false);
         getVistaSimulacion().getBtnVerde().setEnabled(false);
-        
+
         getVistaSimulacion().getBtnRojo_grup2().setEnabled(false);
         getVistaSimulacion().getBtnAmarillo_grup2().setEnabled(false);
         getVistaSimulacion().getBtnVerde_grup2().setEnabled(false);
@@ -146,15 +183,15 @@ public class Modelo {
         getVistaSimulacion().getBtnRojo().setEnabled(true);
         getVistaSimulacion().getBtnAmarillo().setEnabled(true);
         getVistaSimulacion().getBtnVerde().setEnabled(true);
-        
+
         getVistaSimulacion().getBtnRojo().setSelected(true);
         getVistaSimulacion().getBtnAmarillo().setSelected(true);
         getVistaSimulacion().getBtnVerde().setSelected(true);
-        
+
         getVistaSimulacion().getBtnRojo_grup2().setEnabled(true);
         getVistaSimulacion().getBtnAmarillo_grup2().setEnabled(true);
         getVistaSimulacion().getBtnVerde_grup2().setEnabled(true);
-        
+
         getVistaSimulacion().getBtnRojo_grup2().setSelected(true);
         getVistaSimulacion().getBtnAmarillo_grup2().setSelected(true);
         getVistaSimulacion().getBtnVerde_grup2().setSelected(true);
