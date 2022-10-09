@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/Users/cvelez/Documents/Personal/Especializacion/Informatica%201/gitSemaforo/semaforo/src/persistencia/SemaforoDTO.java</file>
             <file>file:/Users/cvelez/Documents/Personal/Especializacion/Informatica%201/gitSemaforo/semaforo/src/logica/Conexion.java</file>
             <file>file:/Users/cvelez/Documents/Personal/Especializacion/Informatica%201/gitSemaforo/semaforo/src/logica/SistemaCliente.java</file>
@@ -11,6 +12,11 @@
             <file>file:/Users/cvelez/Documents/Personal/Especializacion/Informatica%201/gitSemaforo/semaforo/src/semaforo/Semaforo.java</file>
             <file>file:/Users/cvelez/Documents/Personal/Especializacion/Informatica%201/gitSemaforo/semaforo/src/presentacion/VistaSimulacion.java</file>
             <file>file:/Users/cvelez/Documents/Personal/Especializacion/Informatica%201/gitSemaforo/semaforo/src/logica/CicloSemaforico.java</file>
+=======
+            <file>file:/D:/KENNY%20ESTEBAN/Documents/PROYECTOS%20GIT/semaforo/src/logica/CicloSemaforico.java</file>
+            <file>file:/D:/KENNY%20ESTEBAN/Documents/PROYECTOS%20GIT/semaforo/src/logica/Sensor.java</file>
+            <file>file:/D:/KENNY%20ESTEBAN/Documents/PROYECTOS%20GIT/semaforo/src/presentacion/VistaSimulacion.java</file>
+>>>>>>> 3b5cb9bce9230bed1e28454afe6ae9cae5389a01
         </group>
     </open-files>
 </project-private>

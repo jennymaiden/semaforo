@@ -104,17 +104,17 @@ public class testCliente {
         }
     }
 
-    public static void main(String[] argumentos) {
-        testCliente cliente = new testCliente();
-        Scanner escaner = new Scanner(System.in);
-        mostrarTexto("Ingresa la IP: [localhost por defecto] ");
-        String ip = escaner.nextLine();
-        if (ip.length() <= 0) ip = "localhost";
-
-        mostrarTexto("Puerto: [5050 por defecto] ");
-        String puerto = escaner.nextLine();
-        if (puerto.length() <= 0) puerto = "5050";
-        cliente.ejecutarConexion(ip, Integer.parseInt(puerto));
-        cliente.escribirDatos();
-    }
+//    public static void main(String[] argumentos) {
+//        testCliente cliente = new testCliente();
+//        Scanner escaner = new Scanner(System.in);
+//        mostrarTexto("Ingresa la IP: [localhost por defecto] ");
+//        String ip = escaner.nextLine();
+//        if (ip.length() <= 0) ip = "localhost";
+//
+//        mostrarTexto("Puerto: [5050 por defecto] ");
+//        String puerto = escaner.nextLine();
+//        if (puerto.length() <= 0) puerto = "5050";
+//        cliente.ejecutarConexion(ip, Integer.parseInt(puerto));
+//        cliente.escribirDatos();
+//    }
 }

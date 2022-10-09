@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
+import presentacion.Modelo;
 
 /**
  *
@@ -26,6 +27,9 @@ public class ConexionCliente {
     protected String mensajeServidor; //Mensajes entrantes (recibidos) en el servidor
     final String COMANDO_TERMINACION = "salir()";
     Scanner teclado = new Scanner(System.in);
+    
+    private  Modelo modelo = new Modelo();
+
 
     public void levantarConexion(String host, int puerto) {
         this.host = host;
@@ -80,7 +84,7 @@ public class ConexionCliente {
                 st = (String) bufferDeEntrada.readUTF();
                 mostrarTexto("\n[Servidor] => " + st);
                 
-                System.out.print("\n[Usted] => ");
+                //System.out.print("\n[Usted] => ");
             } while (!st.equals(COMANDO_TERMINACION));
         } catch (IOException e) {}
     }

@@ -24,14 +24,14 @@ public class SistemaHilos  extends Thread{
     @Override
     public void run() {
         
-        SistemaCliente cliente;
-        try {
-            cliente = new SistemaCliente();
-            cliente.startClient(this.nombre);
-            System.out.println ("Hola soy el cliente: "+this.nombre);
-        } catch (IOException ex) {
-            Logger.getLogger(SistemaHilos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        SistemaCliente cliente;
+//        try {
+//            cliente = new SistemaCliente();
+//            cliente.startClient(this.nombre);
+//            System.out.println ("Hola soy el cliente: "+this.nombre);
+//        } catch (IOException ex) {
+//            Logger.getLogger(SistemaHilos.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     public String getMsg() {

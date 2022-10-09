@@ -55,6 +55,9 @@ public class VistaSimulacion extends javax.swing.JDialog {
         lbl_img1 = new javax.swing.JLabel();
         lbl_img2 = new javax.swing.JLabel();
         lbl_img3 = new javax.swing.JLabel();
+        lbl_img11 = new javax.swing.JLabel();
+        lbl_img22 = new javax.swing.JLabel();
+        lbl_img33 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lbl_numConjunto1 = new javax.swing.JLabel();
         lbl_grup2_image_red = new javax.swing.JLabel();
@@ -65,8 +68,17 @@ public class VistaSimulacion extends javax.swing.JDialog {
         btnRojo_grup2 = new javax.swing.JRadioButton();
         btnAmarillo_grup2 = new javax.swing.JRadioButton();
         btnVerde_grup2 = new javax.swing.JRadioButton();
+        lbl_grup2_image_yellow1 = new javax.swing.JLabel();
         btn_off = new javax.swing.JButton();
         btn_on = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        lbl_numConjunto2 = new javax.swing.JLabel();
+        btnRojo_grup3 = new javax.swing.JRadioButton();
+        btnVerde_grup3 = new javax.swing.JRadioButton();
+        lbl_grupo3_imageRed = new javax.swing.JLabel();
+        lbl_grupo3_imageGreen = new javax.swing.JLabel();
+        lbl_grupo3_imageRed2 = new javax.swing.JLabel();
+        lbl_grupo3_imageGreen2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,50 +106,68 @@ public class VistaSimulacion extends javax.swing.JDialog {
 
         lbl_img3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/green_false.png"))); // NOI18N
 
+        lbl_img11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/red_false.png"))); // NOI18N
+
+        lbl_img22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/yellow_false.png"))); // NOI18N
+
+        lbl_img33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/green_false.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(lbl_numConjunto)
-                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_img2)
-                    .addComponent(lbl_img1)
-                    .addComponent(lbl_img3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbl_img1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_img11))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_img2)
+                                    .addComponent(lbl_img3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_img22)
+                                    .addComponent(lbl_img33)))))
+                    .addComponent(lbl_numConjunto))
+                .addGap(523, 523, 523)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAmarillo)
                     .addComponent(btnRojo)
-                    .addComponent(btnVerde))
-                .addGap(124, 151, Short.MAX_VALUE))
+                    .addComponent(btnAmarillo)
+                    .addComponent(btnVerde)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(lbl_numConjunto))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(btnRojo)
-                        .addGap(43, 43, 43)
-                        .addComponent(btnAmarillo))
+                        .addComponent(lbl_numConjunto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lbl_img22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_img33))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_img1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbl_img11, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_img2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_img3))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(lbl_img1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRojo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_img2)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAmarillo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_img3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
                         .addComponent(btnVerde)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         lbl_numConjunto1.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
@@ -164,61 +194,58 @@ public class VistaSimulacion extends javax.swing.JDialog {
 
         btnVerde_grup2.setText("Verde");
 
+        lbl_grup2_image_yellow1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/yellow_false.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(lbl_numConjunto1)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_grup2_image_yellow)
-                            .addComponent(lbl_grup2_image_red)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lbl_grup2_image_green)))
+                    .addComponent(lbl_numConjunto1)
+                    .addComponent(btnVerde_grup2)
+                    .addComponent(btnAmarillo_grup2)
+                    .addComponent(btnRojo_grup2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 565, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_grup2_image_yellow)
+                    .addComponent(lbl_grup2_image_red)
+                    .addComponent(lbl_grup2_image_green, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_grup2_image_red_2)
                     .addComponent(lbl_grup2_image_green_2)
-                    .addComponent(lbl_grup2_image_red_2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRojo_grup2)
-                    .addComponent(btnAmarillo_grup2)
-                    .addComponent(btnVerde_grup2))
-                .addGap(29, 29, 29))
+                    .addComponent(lbl_grup2_image_yellow1))
+                .addGap(21, 21, 21))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(53, 53, 53)
-                                .addComponent(lbl_numConjunto1))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(lbl_grup2_image_red, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_grup2_image_yellow)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_grup2_image_green))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(lbl_grup2_image_red_2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_grup2_image_green_2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
+                        .addComponent(lbl_numConjunto1)
+                        .addGap(8, 8, 8)
                         .addComponent(btnRojo_grup2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnAmarillo_grup2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnVerde_grup2)))
+                        .addComponent(btnVerde_grup2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lbl_grup2_image_red_2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl_grup2_image_yellow1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(lbl_grup2_image_red, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_grup2_image_yellow)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_grup2_image_green)
+                            .addComponent(lbl_grup2_image_green_2, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -226,40 +253,119 @@ public class VistaSimulacion extends javax.swing.JDialog {
 
         btn_on.setText("Encender todo");
 
+        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+
+        lbl_numConjunto2.setFont(new java.awt.Font("Georgia", 1, 14)); // NOI18N
+        lbl_numConjunto2.setText("Grupo 3");
+
+        btnRojo_grup3.setBackground(new java.awt.Color(204, 204, 255));
+        btnRojo_grup3.setText("Rojo");
+        btnRojo_grup3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRojo_grup3ActionPerformed(evt);
+            }
+        });
+
+        btnVerde_grup3.setBackground(new java.awt.Color(204, 204, 255));
+        btnVerde_grup3.setText("Verde");
+
+        lbl_grupo3_imageRed.setBackground(new java.awt.Color(204, 204, 255));
+        lbl_grupo3_imageRed.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/red_false.png"))); // NOI18N
+
+        lbl_grupo3_imageGreen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/green_false.png"))); // NOI18N
+
+        lbl_grupo3_imageRed2.setBackground(new java.awt.Color(204, 204, 255));
+        lbl_grupo3_imageRed2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/red_false.png"))); // NOI18N
+
+        lbl_grupo3_imageGreen2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/green_false.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbl_numConjunto2))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(lbl_grupo3_imageGreen))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lbl_grupo3_imageRed)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 568, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_grupo3_imageGreen2)
+                    .addComponent(lbl_grupo3_imageRed2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVerde_grup3)
+                    .addComponent(btnRojo_grup3))
+                .addGap(12, 12, 12))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(lbl_grupo3_imageRed, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_grupo3_imageGreen))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_numConjunto2)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnRojo_grup3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVerde_grup3))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(lbl_grupo3_imageRed2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_grupo3_imageGreen2)))
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(257, 257, 257)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(303, 303, 303)
                         .addComponent(jLabel1)
-                        .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btn_on)
-                            .addComponent(btn_off))))
-                .addContainerGap(180, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_off, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_on, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(btn_off))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_on)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(295, Short.MAX_VALUE))
+                .addGap(64, 64, 64))
         );
 
         pack();
@@ -273,6 +379,10 @@ public class VistaSimulacion extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRojo_grup2ActionPerformed
 
+    private void btnRojo_grup3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRojo_grup3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRojo_grup3ActionPerformed
+
     
     private void asignarListener() {
         btnRojo.addActionListener(getControlador());
@@ -281,6 +391,8 @@ public class VistaSimulacion extends javax.swing.JDialog {
         btnRojo_grup2.addActionListener(getControlador());
         btnAmarillo_grup2.addActionListener(getControlador());
         btnVerde_grup2.addActionListener(getControlador());
+        btnRojo_grup3.addActionListener(getControlador());
+        btnVerde_grup3.addActionListener(getControlador());
         btn_off.addActionListener(getControlador());
         btn_on.addActionListener(getControlador());
                 
@@ -292,24 +404,36 @@ public class VistaSimulacion extends javax.swing.JDialog {
     private javax.swing.ButtonGroup btnGroupVehicular;
     private javax.swing.JRadioButton btnRojo;
     private javax.swing.JRadioButton btnRojo_grup2;
+    private javax.swing.JRadioButton btnRojo_grup3;
     private javax.swing.JRadioButton btnVerde;
     private javax.swing.JRadioButton btnVerde_grup2;
+    private javax.swing.JRadioButton btnVerde_grup3;
     private javax.swing.JButton btn_off;
     private javax.swing.JButton btn_on;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lbl_grup2_image_green;
     private javax.swing.JLabel lbl_grup2_image_green_2;
     private javax.swing.JLabel lbl_grup2_image_red;
     private javax.swing.JLabel lbl_grup2_image_red_2;
     private javax.swing.JLabel lbl_grup2_image_yellow;
+    private javax.swing.JLabel lbl_grup2_image_yellow1;
+    private javax.swing.JLabel lbl_grupo3_imageGreen;
+    private javax.swing.JLabel lbl_grupo3_imageGreen2;
+    private javax.swing.JLabel lbl_grupo3_imageRed;
+    private javax.swing.JLabel lbl_grupo3_imageRed2;
     private javax.swing.JLabel lbl_img1;
+    private javax.swing.JLabel lbl_img11;
     private javax.swing.JLabel lbl_img2;
+    private javax.swing.JLabel lbl_img22;
     private javax.swing.JLabel lbl_img3;
+    private javax.swing.JLabel lbl_img33;
     private javax.swing.JLabel lbl_numConjunto;
     private javax.swing.JLabel lbl_numConjunto1;
+    private javax.swing.JLabel lbl_numConjunto2;
     // End of variables declaration//GEN-END:variables
     
     
@@ -336,13 +460,21 @@ public class VistaSimulacion extends javax.swing.JDialog {
     public JLabel getLbl_img1() {
         return lbl_img1;
     }
-
+    
+    public JLabel getLbl_img11() {
+        return lbl_img11;
+    }
     public JLabel getLbl_img2() {
         return lbl_img2;
     }
-
+    public JLabel getLbl_img22() {
+        return lbl_img22;
+    }
     public JLabel getLbl_img3() {
         return lbl_img3;
+    }
+        public JLabel getLbl_img33() {
+        return lbl_img33;
     }
 
     public JRadioButton getBtnAmarillo_grup2() {
@@ -368,13 +500,33 @@ public class VistaSimulacion extends javax.swing.JDialog {
     public JLabel getLbl_grup2_image_red() {
         return lbl_grup2_image_red;
     }
+    
+
 
     public JLabel getLbl_grup2_image_red_2() {
         return lbl_grup2_image_red_2;
     }
 
+    public JLabel getLbl_grupo3_imageRed() {
+        return lbl_grupo3_imageRed;
+    }
+    
+    public JLabel getLbl_grupo3_imageRed2() {
+        return lbl_grupo3_imageRed2;
+    }
     public JLabel getLbl_grup2_image_yellow() {
         return lbl_grup2_image_yellow;
+    }
+    public JLabel getLbl_grup2_image_yellow1() {
+        return lbl_grup2_image_yellow1;
+    }
+    
+    public JLabel getLbl_grupo3_imageGreen() {
+        return lbl_grupo3_imageGreen;
+    }
+
+    public JLabel getLbl_grupo3_imageGreen2() {
+        return lbl_grupo3_imageGreen2;
     }
 
     public JButton getBtn_off() {
@@ -384,6 +536,18 @@ public class VistaSimulacion extends javax.swing.JDialog {
     public JButton getBtn_on() {
         return btn_on;
     }
+
+    public JRadioButton getBtnRojo_grup3() {
+        return btnRojo_grup3;
+    }
+
+    public JRadioButton getBtnVerde_grup3() {
+        return btnVerde_grup3;
+    }
+
+
+
+
 
     
 }
