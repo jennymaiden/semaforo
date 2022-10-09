@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package presentacion;
+package presentacion.cliente2;
 
 import java.io.IOException;
 import javax.swing.ImageIcon;
@@ -13,22 +13,25 @@ import persistencia.Vehicular;
  *
  * @author cvelez
  */
-public class Modelo {
-
-    private VistaSimulacion ventanaSimulacion;
+/**
+ *
+ * @author cvelez
+ */
+public class Modelo2{
+    private VistaSimulacion2 ventanaSimulacion;
 
     private Vehicular semaforoVechicular;
 
-    public VistaSimulacion getVistaSimulacion() {
+    public VistaSimulacion2 getVistaSimulacion() {
 
         if (ventanaSimulacion == null) {
-            ventanaSimulacion = new VistaSimulacion(this);
+            ventanaSimulacion = new VistaSimulacion2(this);
         }
         return ventanaSimulacion;
     }
 
     public void iniciar() {
-        getVistaSimulacion().setSize(800, 900);
+        getVistaSimulacion().setSize(700, 600);
         getVistaSimulacion().setVisible(true);
         getVistaSimulacion().setLocationRelativeTo(null);
        
@@ -91,7 +94,7 @@ public class Modelo {
                     getVistaSimulacion().getLbl_grup2_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
                     getVistaSimulacion().getLbl_grup2_image_red_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
                 }   break;
-            default:
+            /*default:
                 if (accion) {
                     getVistaSimulacion().getLbl_grupo3_imageRed().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
                     getVistaSimulacion().getLbl_grupo3_imageRed2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
@@ -99,6 +102,7 @@ public class Modelo {
                     getVistaSimulacion().getLbl_grupo3_imageRed().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
                     getVistaSimulacion().getLbl_grupo3_imageRed2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
                 }   break;
+            */
         }
     }
 
@@ -149,7 +153,7 @@ public class Modelo {
                     getVistaSimulacion().getLbl_grup2_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
                     getVistaSimulacion().getLbl_grup2_image_green_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
                 }   break;
-            default:
+            /*default:
                 if (accion) {
                     getVistaSimulacion().getLbl_grupo3_imageGreen().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
                     getVistaSimulacion().getLbl_grupo3_imageGreen2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
@@ -157,6 +161,7 @@ public class Modelo {
                     getVistaSimulacion().getLbl_grupo3_imageGreen().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
                     getVistaSimulacion().getLbl_grupo3_imageGreen2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
                 }   break;
+            */
         }
 
     }
