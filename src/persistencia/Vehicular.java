@@ -11,7 +11,11 @@ import java.awt.Graphics;
  *
  * @author cvelez
  */
-public class Vehicular extends SemaforoDTO{
+public class Vehicular extends Dispositivo{
+
+    public Vehicular(String nombre, boolean b, boolean b0, boolean b1) {
+        super( nombre, b,  b0,  b1);
+    }
     
     public void paintSemaforoVechiculo(Graphics g) {
         

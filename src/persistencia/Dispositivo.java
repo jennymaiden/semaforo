@@ -8,16 +8,46 @@ package persistencia;
  *
  * @author cvelez
  */
-public abstract class SemaforoDTO {
+public abstract class Dispositivo {
     
+    public String idGrupo;
     public boolean luz_verde;
     public boolean luz_amarilla;
     public boolean luz_roja;
-    
-    public int tension_verde;
-    public int tension_amarilla;
-    public int tension_roja;
 
+    public Dispositivo() {
+    }
+
+    public Dispositivo(String idGrupo, boolean luz_verde, boolean luz_amarilla, boolean luz_roja) {
+        this.idGrupo = idGrupo;
+        this.luz_verde = luz_verde;
+        this.luz_amarilla = luz_amarilla;
+        this.luz_roja = luz_roja;
+    }
+
+    public void apagar() {
+        this.luz_roja = false;
+        this.luz_amarilla = false;
+        this.luz_verde = false;
+    }
+    
+    public void encender() {
+        this.luz_roja = true;
+        this.luz_amarilla = true;
+        this.luz_verde = true;
+    }
+    
+    public String getIdGrupo() {
+        return idGrupo;
+    }
+
+    public void setIdGrupo(String idGrupo) {
+        this.idGrupo = idGrupo;
+    }
+
+    
+   
+    
     public boolean isLuz_verde() {
         return luz_verde;
     }
@@ -42,28 +72,5 @@ public abstract class SemaforoDTO {
         this.luz_roja = luz_roja;
     }
 
-    public int getTension_verde() {
-        return tension_verde;
-    }
-
-    public void setTension_verde(int tension_verde) {
-        this.tension_verde = tension_verde;
-    }
-
-    public int getTension_amarilla() {
-        return tension_amarilla;
-    }
-
-    public void setTension_amarilla(int tension_amarilla) {
-        this.tension_amarilla = tension_amarilla;
-    }
-
-    public int getTension_roja() {
-        return tension_roja;
-    }
-
-    public void setTension_roja(int tension_roja) {
-        this.tension_roja = tension_roja;
-    }
     
 }

@@ -15,6 +15,7 @@ import java.util.Scanner;
  * @author cvelez
  */
 public class testCliente {
+
     private Socket socket;
     private DataInputStream bufferDeEntrada = null;
     private DataOutputStream bufferDeSalida = null;
@@ -46,12 +47,15 @@ public class testCliente {
     }
 
     public void enviar(String s) {
-        try {
-            bufferDeSalida.writeUTF(s);
-            bufferDeSalida.flush();
-        } catch (IOException e) {
-            mostrarTexto("IOException on enviar");
+        while (true) {
+            try {
+                bufferDeSalida.writeUTF(s);
+                bufferDeSalida.flush();
+            } catch (IOException e) {
+                mostrarTexto("IOException on enviar");
+            }
         }
+
     }
 
     public void cerrarConexion() {
@@ -59,10 +63,10 @@ public class testCliente {
             bufferDeEntrada.close();
             bufferDeSalida.close();
             socket.close();
-            mostrarTexto("Conexión terminada");
+            mostrarTexto("Conexión terminada Cliente");
         } catch (IOException e) {
             mostrarTexto("IOException on cerrarConexion()");
-        }finally{
+        } finally {
             System.exit(0);
         }
     }
@@ -91,7 +95,8 @@ public class testCliente {
                 mostrarTexto("\n[Servidor] => " + st);
                 System.out.print("\n[Usted] => ");
             } while (!st.equals(COMANDO_TERMINACION));
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
     }
 
     public void escribirDatos() {
@@ -99,8 +104,9 @@ public class testCliente {
         while (true) {
             System.out.print("[Usted] => ");
             entrada = teclado.nextLine();
-            if(entrada.length() > 0)
+            if (entrada.length() > 0) {
                 enviar(entrada);
+            }
         }
     }
 

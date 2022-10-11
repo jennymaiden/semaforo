@@ -39,34 +39,35 @@ public class Modelo3{
     }
 
     public void conectarClientes(int numCruce) throws IOException {
-        ConexionCliente cliente = new ConexionCliente();
-        switch (numCruce) {
-            case 1: // Primer cruce
-
-                System.out.println("Usted eligió la opcion 1.");
-                //Iniciar cliente
-                cliente.ejecutarConexion("localhost", 5050, "cliente1");
-                
-                
-                break;
-
-            case 2: // Segundo cruce
-
-                System.out.println("Usted eligió la opcion 2.");
-
-                break;
-
-            case 3: // Tercer cruce
-
-                System.out.println("Usted eligió la opcion 3.");
-
-                break;
-
-            default:
-
-                System.out.println("Opcion incorrecta");
-
-        }
+//        ConexionCliente cliente = new ConexionCliente();
+//        cliente.ejecutarConexion("localhost", 5050, "cliente3");
+//        switch (numCruce) {
+//            case 1: // Primer cruce
+//
+//                System.out.println("Usted eligió la opcion 1.");
+//                //Iniciar cliente
+//                cliente.ejecutarConexion("localhost", 5050, "cliente1");
+//                
+//                
+//                break;
+//
+//            case 2: // Segundo cruce
+//
+//                System.out.println("Usted eligió la opcion 2.");
+//
+//                break;
+//
+//            case 3: // Tercer cruce
+//
+//                System.out.println("Usted eligió la opcion 3.");
+//
+//                break;
+//
+//            default:
+//
+//                System.out.println("Opcion incorrecta");
+//
+//        }
     }
     public String getEstado(){
         return "luces ok";

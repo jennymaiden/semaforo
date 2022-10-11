@@ -34,19 +34,19 @@ public class ControladorSimulacion implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() instanceof JRadioButton) {
             JRadioButton radioButton = (JRadioButton) e.getSource();
-            if (radioButton == simulacion.getBtnRojo()) {
-                getModelo().accionRojo(radioButton.isSelected(), 1);
-            } else if (radioButton == simulacion.getBtnAmarillo()) {
-                getModelo().accionAmarilla(radioButton.isSelected(), 1);
-            } else if (radioButton == simulacion.getBtnVerde()) {
-                getModelo().accionVerde(radioButton.isSelected(), 1);
-            } else if (radioButton == simulacion.getBtnRojo_grup2()) {
-                getModelo().accionRojo(radioButton.isSelected(), 2);
-            } else if (radioButton == simulacion.getBtnAmarillo_grup2()) {
-                getModelo().accionAmarilla(radioButton.isSelected(), 2);
-            } else if (radioButton == simulacion.getBtnVerde_grup2()) {
-                getModelo().accionVerde(radioButton.isSelected(), 2);
-            }
+//            if (radioButton == simulacion.getBtnRojo()) {
+//                getModelo().accionRojo(radioButton.isSelected(), 1);
+//            } else if (radioButton == simulacion.getBtnAmarillo()) {
+//                getModelo().accionAmarilla(radioButton.isSelected(), 1);
+//            } else if (radioButton == simulacion.getBtnVerde()) {
+//                getModelo().accionVerde(radioButton.isSelected(), 1);
+//            } else if (radioButton == simulacion.getBtnRojo_grup2()) {
+//                getModelo().accionRojo(radioButton.isSelected(), 2);
+//            } else if (radioButton == simulacion.getBtnAmarillo_grup2()) {
+//                getModelo().accionAmarilla(radioButton.isSelected(), 2);
+//            } else if (radioButton == simulacion.getBtnVerde_grup2()) {
+//                getModelo().accionVerde(radioButton.isSelected(), 2);
+//            }
         } else if (e.getSource() instanceof JButton) {
             JButton btnButton = (JButton) e.getSource();
             if (btnButton == simulacion.getBtn_off()){

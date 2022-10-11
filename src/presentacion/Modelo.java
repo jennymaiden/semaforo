@@ -5,9 +5,18 @@
 package presentacion;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import logica.ConexionCliente;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistencia.Dispositivo;
 import persistencia.Vehicular;
+import semaforo.Semaforo;
 
 /**
  *
@@ -16,8 +25,9 @@ import persistencia.Vehicular;
 public class Modelo {
 
     private VistaSimulacion ventanaSimulacion;
+    private List<Dispositivo> listSemaforos;
 
-    private Vehicular semaforoVechicular;
+    private ConexionCliente cliente;
 
     public VistaSimulacion getVistaSimulacion() {
 
@@ -28,45 +38,102 @@ public class Modelo {
     }
 
     public void iniciar() {
-        getVistaSimulacion().setSize(700, 600);
+        getVistaSimulacion().setSize(1000, 600);
         getVistaSimulacion().setVisible(true);
         getVistaSimulacion().setLocationRelativeTo(null);
-       
-
+        iniciarSemaforos();
     }
 
-    public void conectarClientes(int numCruce) throws IOException {
-        ConexionCliente cliente = new ConexionCliente();
-        switch (numCruce) {
-            case 1: // Primer cruce
+    public void iniciarSemaforos() {
+        listSemaforos = new ArrayList<Dispositivo>();
+        
+        listSemaforos.add(new Vehicular("1", false, false, false));
+        listSemaforos.add(new Vehicular("4", false, false, false));
+        listSemaforos.add(new Vehicular("21", false, false, false));
+        listSemaforos.add(new Vehicular("24", false, false, false));
+    }
 
-                System.out.println("Usted eligió la opcion 1.");
-                //Iniciar cliente
-                cliente.ejecutarConexion("localhost", 5050, "cliente1");
-                
-                
-                break;
+    public void iniciarCliente() {
+        if (cliente == null) {
+            cliente = new ConexionCliente(this);
+        }
 
-            case 2: // Segundo cruce
+        cliente.ejecutarConexion("localhost", 5050);
+        //cliente.enviar("Cliente1");
+        //cliente.setEstado(getEstado());
+    }
 
-                System.out.println("Usted eligió la opcion 2.");
-
-                break;
-
-            case 3: // Tercer cruce
-
-                System.out.println("Usted eligió la opcion 3.");
-
-                break;
-
-            default:
-
-                System.out.println("Opcion incorrecta");
+    /**
+     * 0	APAGADO 1	ROJO 2	AMARILLO 3	VERDE 4	ROJO-AMARILLO 5	PEATON CORRIENDO 6
+     * AMARILLO INTERMITENTE
+     */
+    public void leerEstados(String mensaje) {
+        JSONArray jsonArray = new JSONArray(mensaje);
+        for (int i = 0; i < jsonArray.length(); i++) {
+            JSONObject object = jsonArray.getJSONObject(i);
+            // Leer por grupos
+            int senal = object.getInt("senal");
+            int idGrupo = object.getInt("idGrupo");
+            pintarEstados(senal,idGrupo);
 
         }
+        //enviar respuesta
+        cliente.enviar(getEstado());
     }
-    public String getEstado(){
-        return "luces ok";
+
+    public void pintarEstados(int senal, int grupo) {
+
+        switch (senal) {
+            case 0: //Apagado
+                accionApagarTodo();
+                break;
+            case 1: // Rojo
+                accionRojo(true, grupo);
+                accionAmarilla(false, grupo);
+                accionVerde(false, grupo);
+                break;
+            case 2: // Amarillo
+                accionAmarilla(true, grupo);
+                
+                accionRojo(false, grupo);
+                accionVerde(false, grupo);
+                break;
+            case 3: //Verde
+                accionVerde(true, grupo);
+                
+                accionRojo(false, grupo);
+                accionAmarilla(false, grupo);
+                break;
+            case 4: // ROJO-AMARILLO
+                accionRojo(true, grupo);
+                accionAmarilla(true, grupo);
+                break;
+            case 5: // PEATON CORRIENDO verdeIntermitente
+                verdeIntermitente(grupo);
+                accionRojo(false, grupo);
+                accionAmarilla(true, grupo);
+                break;
+            case 6: // AMARILLO INTERMITENTE
+                accionRojo(false, grupo);
+                amarrilloIntermitente( grupo);
+                accionVerde(false, grupo);
+                break;
+        }
+    }
+
+    public String getEstado() {
+        // Validar cuantos grupos tengo
+        JSONArray jsonArray = new JSONArray();
+        for (Dispositivo dispositivo : listSemaforos) {
+            JSONObject json = new JSONObject();
+            json.put("idGrupo", dispositivo.getIdGrupo());
+            json.put("Rojo", (dispositivo.isLuz_roja() ? "Activo" : "Apagada"));
+            json.put("Amarillo", (dispositivo.isLuz_amarilla() ? "Activo" : "Apagada"));
+            json.put("Verde", (dispositivo.isLuz_verde() ? "Activo" : "Apagada"));
+            jsonArray.put(json);
+        }
+
+        return jsonArray.toString();
     }
 
     /*
@@ -76,31 +143,53 @@ public class Modelo {
 
         switch (grupo) {
             case 1:
+                Dispositivo dispositivo = listSemaforos.get(0);
+                dispositivo.setLuz_roja(accion);
                 if (accion) {
                     getVistaSimulacion().getLbl_img1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
                     getVistaSimulacion().getLbl_img11().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
                 } else {
                     getVistaSimulacion().getLbl_img1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
                     getVistaSimulacion().getLbl_img11().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
-                }   break;
-            case 2:
+                }
+                listSemaforos.set(0, dispositivo);
+                break;
+            case 4:
+                Dispositivo dispositivo2 = listSemaforos.get(1);
+                dispositivo2.setLuz_roja(accion);
                 if (accion) {
                     getVistaSimulacion().getLbl_grup2_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
                     getVistaSimulacion().getLbl_grup2_image_red_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
                 } else {
                     getVistaSimulacion().getLbl_grup2_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
                     getVistaSimulacion().getLbl_grup2_image_red_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
-                }   break;
-            /*default:
+                }
+                listSemaforos.set(1, dispositivo2);
+                break;
+            case 21:
+                Dispositivo dispositivo3 = listSemaforos.get(2);
+                dispositivo3.setLuz_roja(accion);
                 if (accion) {
-                    getVistaSimulacion().getLbl_grupo3_imageRed().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
-                    getVistaSimulacion().getLbl_grupo3_imageRed2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
+                    getVistaSimulacion().getLbl_grup3_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
+                    getVistaSimulacion().getLbl_grup3_image_red_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
                 } else {
-                    getVistaSimulacion().getLbl_grupo3_imageRed().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
-                    getVistaSimulacion().getLbl_grupo3_imageRed2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
-                }   break;
-                
-             */
+                    getVistaSimulacion().getLbl_grup3_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
+                    getVistaSimulacion().getLbl_grup3_image_red_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
+                }
+                listSemaforos.set(2, dispositivo3);
+                break;
+            case 24:
+                Dispositivo dispositivo4 = listSemaforos.get(3);
+                dispositivo4.setLuz_roja(accion);
+                if (accion) {
+                    getVistaSimulacion().getLbl_grup4_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
+                    getVistaSimulacion().getLbl_grup4_image_red_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
+                } else {
+                    getVistaSimulacion().getLbl_grup4_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
+                    getVistaSimulacion().getLbl_grup4_image_red_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
+                }
+                listSemaforos.set(3, dispositivo4);
+                break;
         }
     }
 
@@ -111,22 +200,66 @@ public class Modelo {
 
         switch (grupo) {
             case 1:
+                Dispositivo dispositivo = listSemaforos.get(0);
+                dispositivo.setLuz_amarilla(accion);
                 if (accion) {
                     getVistaSimulacion().getLbl_img2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_true.png")));
                     getVistaSimulacion().getLbl_img22().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_true.png")));
                 } else {
                     getVistaSimulacion().getLbl_img2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_false.png")));
                     getVistaSimulacion().getLbl_img22().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_false.png")));
-                }   break;
-            case 2:
+                }
+                listSemaforos.set(0, dispositivo);
+                break;
+            case 4:
+                Dispositivo dispositivo2 = listSemaforos.get(1);
+                dispositivo2.setLuz_amarilla(accion);
                 if (accion) {
                     getVistaSimulacion().getLbl_grup2_image_yellow().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_true.png")));
                     getVistaSimulacion().getLbl_grup2_image_yellow1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_true.png")));
                 } else {
                     getVistaSimulacion().getLbl_grup2_image_yellow().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_false.png")));
                     getVistaSimulacion().getLbl_grup2_image_yellow1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_false.png")));
-                }   break;
+                }
+                listSemaforos.set(1, dispositivo2);
+                break;
         }
+    }
+
+    void amarrilloIntermitente(int grupo) {
+
+        TimerTask timerTask = new TimerTask() {
+
+            int tiempo = 0;
+            int contador = 0;
+
+            public void run() {
+                // Aquí el código que queremos ejecutar.
+                //System.out.println("segundo "+segundo);
+                if (contador < 10) {
+                    switch (tiempo) {
+                        case 0:
+                            //Enviar primer grupo de conexion
+                            accionAmarilla(true, grupo);
+                            break;
+                        case 2:
+                            //Enviar cambio
+                            accionAmarilla(false, grupo);
+                            tiempo = 0;
+                            contador++;
+                            break;
+
+                    }
+                } else {
+                    cancel();
+                }
+
+                tiempo++;
+            }
+        };
+        Timer timer = new Timer();
+        // Dentro de 0 milisegundos avísame cada 1000 milisegundos
+        timer.scheduleAtFixedRate(timerTask, 0, 500);
     }
 
     /*
@@ -136,32 +269,92 @@ public class Modelo {
 
         switch (grupo) {
             case 1:
+                Dispositivo dispositivo = listSemaforos.get(0);
+                dispositivo.setLuz_verde(accion);
                 if (accion) {
                     getVistaSimulacion().getLbl_img3().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
                     getVistaSimulacion().getLbl_img33().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
                 } else {
                     getVistaSimulacion().getLbl_img3().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
                     getVistaSimulacion().getLbl_img33().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
-                }   break;
-            case 2:
+                }
+                listSemaforos.set(0, dispositivo);
+                break;
+            case 4:
+                Dispositivo dispositivo2 = listSemaforos.get(1);
+                dispositivo2.setLuz_verde(accion);
                 if (accion) {
                     getVistaSimulacion().getLbl_grup2_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
                     getVistaSimulacion().getLbl_grup2_image_green_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
                 } else {
                     getVistaSimulacion().getLbl_grup2_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
                     getVistaSimulacion().getLbl_grup2_image_green_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
-                }   break;
-           /* default:
+                }
+                listSemaforos.set(1, dispositivo2);
+                break;
+            case 21:
+                Dispositivo dispositivo3 = listSemaforos.get(2);
+                dispositivo3.setLuz_verde(accion);
                 if (accion) {
-                    getVistaSimulacion().getLbl_grupo3_imageGreen().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
-                    getVistaSimulacion().getLbl_grupo3_imageGreen2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
+                    getVistaSimulacion().getLbl_grup3_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
+                    getVistaSimulacion().getLbl_grup3_image_green_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
                 } else {
-                    getVistaSimulacion().getLbl_grupo3_imageGreen().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
-                    getVistaSimulacion().getLbl_grupo3_imageGreen2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
-                }   break;
-           */
+                    getVistaSimulacion().getLbl_grup3_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
+                    getVistaSimulacion().getLbl_grup3_image_green_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
+                }
+                listSemaforos.set(2, dispositivo3);
+                break;
+            case 24:
+                Dispositivo dispositivo4 = listSemaforos.get(3);
+                dispositivo4.setLuz_verde(accion);
+                if (accion) {
+                    getVistaSimulacion().getLbl_grup4_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
+                    getVistaSimulacion().getLbl_grup4_image_green_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
+                } else {
+                    getVistaSimulacion().getLbl_grup4_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
+                    getVistaSimulacion().getLbl_grup4_image_green_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
+                }
+                listSemaforos.set(3, dispositivo4);
+                break;
+
         }
 
+    }
+
+    public void verdeIntermitente(int grupo) {
+
+        TimerTask timerTask = new TimerTask() {
+            int cicloConexion = 14; // 14 segundos dura el ciclo de conexion
+            int tiempo = 0;
+            int contador = 0;
+
+            public void run() {
+                // Aquí el código que queremos ejecutar.
+                //System.out.println("segundo "+segundo);
+                if (contador < 10) {
+                    switch (tiempo) {
+                        case 0:
+                            //Enviar primer grupo de conexion
+                            accionVerde(true, grupo);
+                            break;
+                        case 2:
+                            //Enviar cambio
+                            accionVerde(false, grupo);
+                            tiempo = 0;
+                            contador++;
+                            break;
+
+                    }
+                } else {
+                    cancel();
+                }
+
+                tiempo++;
+            }
+        };
+        Timer timer = new Timer();
+        // Dentro de 0 milisegundos avísame cada 1000 milisegundos
+        timer.scheduleAtFixedRate(timerTask, 0, 500);
     }
 
     /*
@@ -170,58 +363,87 @@ public class Modelo {
     void accionApagarTodo() {
 
         //Apagar grupo 1
+        Dispositivo dispositivo = listSemaforos.get(0);
+        dispositivo.apagar();
+        listSemaforos.set(0, dispositivo);
         getVistaSimulacion().getLbl_img3().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
         getVistaSimulacion().getLbl_img2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_false.png")));
         getVistaSimulacion().getLbl_img1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
+        getVistaSimulacion().getLbl_img33().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
+        getVistaSimulacion().getLbl_img22().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_false.png")));
+        getVistaSimulacion().getLbl_img11().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
 
         // Apagar grupo 2
+        Dispositivo dispositivo2 = listSemaforos.get(1);
+        dispositivo2.apagar();
+        listSemaforos.set(1, dispositivo2);
         getVistaSimulacion().getLbl_grup2_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
         getVistaSimulacion().getLbl_grup2_image_green_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
         getVistaSimulacion().getLbl_grup2_image_yellow().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_false.png")));
+        getVistaSimulacion().getLbl_grup2_image_yellow1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_false.png")));
         getVistaSimulacion().getLbl_grup2_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
         getVistaSimulacion().getLbl_grup2_image_red_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
 
-        //Desabilitar radiobuttons
-        getVistaSimulacion().getBtnRojo().setEnabled(false);
-        getVistaSimulacion().getBtnAmarillo().setEnabled(false);
-        getVistaSimulacion().getBtnVerde().setEnabled(false);
+        // Apagar grupo 3
+        Dispositivo dispositivo3 = listSemaforos.get(2);
+        dispositivo3.apagar();
+        listSemaforos.set(2, dispositivo3);
+        getVistaSimulacion().getLbl_grup3_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
+        getVistaSimulacion().getLbl_grup3_image_green_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
+        getVistaSimulacion().getLbl_grup3_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
+        getVistaSimulacion().getLbl_grup3_image_red_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
 
-        getVistaSimulacion().getBtnRojo_grup2().setEnabled(false);
-        getVistaSimulacion().getBtnAmarillo_grup2().setEnabled(false);
-        getVistaSimulacion().getBtnVerde_grup2().setEnabled(false);
+        // Apagar grupo 4
+        Dispositivo dispositivo4 = listSemaforos.get(3);
+        dispositivo4.apagar();
+        listSemaforos.set(3, dispositivo4);
+        getVistaSimulacion().getLbl_grup4_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
+        getVistaSimulacion().getLbl_grup4_image_green_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_false.png")));
+        getVistaSimulacion().getLbl_grup4_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
+        getVistaSimulacion().getLbl_grup4_image_red_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_false.png")));
+
+        cliente.enviar("error");
     }
 
     /*
     * Accion de apagar todas las luces
      */
     void accionEncenderTodo() {
-        //Apagar grupo 1
+        //Encender grupo 1
+        Dispositivo dispositivo = listSemaforos.get(0);
+        dispositivo.encender();
+        listSemaforos.set(0, dispositivo);
         getVistaSimulacion().getLbl_img3().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
         getVistaSimulacion().getLbl_img2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_true.png")));
         getVistaSimulacion().getLbl_img1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
 
-        // Apagar grupo 2
+        // Encender grupo 2
+        Dispositivo dispositivo2 = listSemaforos.get(1);
+        dispositivo2.encender();
+        listSemaforos.set(1, dispositivo2);
         getVistaSimulacion().getLbl_grup2_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
         getVistaSimulacion().getLbl_grup2_image_green_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
         getVistaSimulacion().getLbl_grup2_image_yellow().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_true.png")));
+        getVistaSimulacion().getLbl_grup2_image_yellow1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/yellow_true.png")));
         getVistaSimulacion().getLbl_grup2_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
         getVistaSimulacion().getLbl_grup2_image_red_2().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
 
-        //Desabilitar radiobuttons
-        getVistaSimulacion().getBtnRojo().setEnabled(true);
-        getVistaSimulacion().getBtnAmarillo().setEnabled(true);
-        getVistaSimulacion().getBtnVerde().setEnabled(true);
+        // Encender grupo 3
+        Dispositivo dispositivo3 = listSemaforos.get(2);
+        dispositivo3.encender();
+        listSemaforos.set(2, dispositivo3);
+        getVistaSimulacion().getLbl_grup3_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
+        getVistaSimulacion().getLbl_grup3_image_green_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
+        getVistaSimulacion().getLbl_grup3_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
+        getVistaSimulacion().getLbl_grup3_image_red_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
 
-        getVistaSimulacion().getBtnRojo().setSelected(true);
-        getVistaSimulacion().getBtnAmarillo().setSelected(true);
-        getVistaSimulacion().getBtnVerde().setSelected(true);
-
-        getVistaSimulacion().getBtnRojo_grup2().setEnabled(true);
-        getVistaSimulacion().getBtnAmarillo_grup2().setEnabled(true);
-        getVistaSimulacion().getBtnVerde_grup2().setEnabled(true);
-
-        getVistaSimulacion().getBtnRojo_grup2().setSelected(true);
-        getVistaSimulacion().getBtnAmarillo_grup2().setSelected(true);
-        getVistaSimulacion().getBtnVerde_grup2().setSelected(true);
+        // Encender grupo 4
+        Dispositivo dispositivo4 = listSemaforos.get(3);
+        dispositivo4.encender();
+        listSemaforos.set(3, dispositivo4);
+        getVistaSimulacion().getLbl_grup4_image_green().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
+        getVistaSimulacion().getLbl_grup4_image_green_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/green_true.png")));
+        getVistaSimulacion().getLbl_grup4_image_red().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
+        getVistaSimulacion().getLbl_grup4_image_red_1().setIcon(new ImageIcon(getClass().getResource("/Imagenes/red_true.png")));
     }
 }

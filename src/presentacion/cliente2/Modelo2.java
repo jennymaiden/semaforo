@@ -20,8 +20,6 @@ import persistencia.Vehicular;
 public class Modelo2{
     private VistaSimulacion2 ventanaSimulacion;
 
-    private Vehicular semaforoVechicular;
-
     public VistaSimulacion2 getVistaSimulacion() {
 
         if (ventanaSimulacion == null) {
@@ -34,39 +32,39 @@ public class Modelo2{
         getVistaSimulacion().setSize(700, 600);
         getVistaSimulacion().setVisible(true);
         getVistaSimulacion().setLocationRelativeTo(null);
-       
 
     }
 
     public void conectarClientes(int numCruce) throws IOException {
-        ConexionCliente cliente = new ConexionCliente();
-        switch (numCruce) {
-            case 1: // Primer cruce
-
-                System.out.println("Usted eligió la opcion 1.");
-                //Iniciar cliente
-                cliente.ejecutarConexion("localhost", 5050, "cliente1");
-                
-                
-                break;
-
-            case 2: // Segundo cruce
-
-                System.out.println("Usted eligió la opcion 2.");
-
-                break;
-
-            case 3: // Tercer cruce
-
-                System.out.println("Usted eligió la opcion 3.");
-
-                break;
-
-            default:
-
-                System.out.println("Opcion incorrecta");
-
-        }
+//        ConexionCliente cliente = new ConexionCliente();
+//        cliente.ejecutarConexion("localhost", 5050, "cliente2");
+//        switch (numCruce) {
+//            case 1: // Primer cruce
+//
+//                System.out.println("Usted eligió la opcion 1.");
+//                //Iniciar cliente
+//                cliente.ejecutarConexion("localhost", 5050, "cliente1");
+//                
+//                
+//                break;
+//
+//            case 2: // Segundo cruce
+//
+//                System.out.println("Usted eligió la opcion 2.");
+//
+//                break;
+//
+//            case 3: // Tercer cruce
+//
+//                System.out.println("Usted eligió la opcion 3.");
+//
+//                break;
+//
+//            default:
+//
+//                System.out.println("Opcion incorrecta");
+//
+//        }
     }
     public String getEstado(){
         return "luces ok";

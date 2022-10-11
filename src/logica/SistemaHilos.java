@@ -4,10 +4,6 @@
  */
 package logica;
 
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author cvelez
@@ -24,14 +20,9 @@ public class SistemaHilos  extends Thread{
     @Override
     public void run() {
         
-//        SistemaCliente cliente;
-//        try {
-//            cliente = new SistemaCliente();
-//            cliente.startClient(this.nombre);
-//            System.out.println ("Hola soy el cliente: "+this.nombre);
-//        } catch (IOException ex) {
-//            Logger.getLogger(SistemaHilos.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+//        ConexionCliente cliente = new ConexionCliente();
+//        cliente.ejecutarConexion("localhost", 5050, nombre);
+        
     }
 
     public String getMsg() {

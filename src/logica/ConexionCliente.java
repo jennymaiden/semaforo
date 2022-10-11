@@ -9,8 +9,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
 import java.util.Scanner;
+import persistencia.Dispositivo;
 import presentacion.Modelo;
+import static semaforo.testCliente.mostrarTexto;
 
 /**
  *
@@ -27,16 +30,21 @@ public class ConexionCliente {
     protected String mensajeServidor; //Mensajes entrantes (recibidos) en el servidor
     final String COMANDO_TERMINACION = "salir()";
     Scanner teclado = new Scanner(System.in);
-    
-    private  Modelo modelo = new Modelo();
+    public String estado;
+    private final Modelo modelo;
 
+    public ConexionCliente(Modelo modelo) {
+        this.modelo = modelo;
+    }
+
+    
 
     public void levantarConexion(String host, int puerto) {
         this.host = host;
         this.puerto = puerto;
         try {
             socketCliente = new Socket(this.host, this.puerto); //Socket para el cliente en localhost en puerto 1234
-            //mostrarTexto("Conectado a :" + socketCliente.getInetAddress().getHostName());
+            mostrarTexto("Conectado a :" + socketCliente.getInetAddress().getHostName());
         } catch (Exception e) {
             mostrarTexto("Excepción al levantar conexión: " + e.getMessage());
             System.exit(0);
@@ -53,17 +61,19 @@ public class ConexionCliente {
             mostrarTexto("Error en la apertura de flujos");
         }
     }
-    
+
     public void enviar(String s) {
         try {
             bufferDeSalida.writeUTF(s);
             bufferDeSalida.flush();
+            System.out.print("[Usted] => ");
+            mostrarTexto(s);
+            
         } catch (IOException e) {
             mostrarTexto("IOException on enviar");
-            
         }
     }
-    
+
     public void cerrarConexion() {
         try {
             bufferDeEntrada.close();
@@ -72,41 +82,44 @@ public class ConexionCliente {
             mostrarTexto("Conexión terminada");
         } catch (IOException e) {
             mostrarTexto("IOException on cerrarConexion()");
-        }finally{
+        } finally {
             System.exit(0);
         }
     }
-    
+
     public void recibirDatos() {
         String st = "";
         try {
             do {
                 st = (String) bufferDeEntrada.readUTF();
                 mostrarTexto("\n[Servidor] => " + st);
-                
+                //Enviar la señal al modelo
+                modelo.leerEstados(st);
+
                 //System.out.print("\n[Usted] => ");
             } while (!st.equals(COMANDO_TERMINACION));
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
     }
-    
+
     public void escribirDatos(String msg) {
         //String entrada = "";
         while (true) {
             System.out.print("[Usted] => ");
             //entrada = teclado.nextLine();
-            if(msg.length() > 0)
+            if (msg.length() > 0) {
                 enviar(msg);
+            }
         }
     }
-    
-    public void ejecutarConexion(String ip, int puerto, String nombre) {
+
+    public void ejecutarConexion(String ip, int puerto) {
         Thread hilo = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     levantarConexion(ip, puerto);
                     abrirFlujos();
-                    enviar(nombre);
                     recibirDatos();
                 } finally {
                     cerrarConexion();
@@ -115,7 +128,7 @@ public class ConexionCliente {
         });
         hilo.start();
     }
-    
+
     public static void mostrarTexto(String s) {
         System.out.println(s);
     }
@@ -135,5 +148,16 @@ public class ConexionCliente {
     public void setPuerto(int puerto) {
         this.puerto = puerto;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    
+    
 
 }

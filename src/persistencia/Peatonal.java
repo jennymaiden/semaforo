@@ -8,6 +8,6 @@ package persistencia;
  *
  * @author cvelez
  */
-public class Peatonal extends SemaforoDTO{
+public class Peatonal extends Dispositivo{
     
 }
